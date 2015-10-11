@@ -31,4 +31,29 @@ App::uses('Controller', 'Controller');
  * @link		http://book.cakephp.org/2.0/en/controllers.html#the-app-controller
  */
 class AppController extends Controller {
+    //public $components = array('DebugKit.Toolbar');
+    // ...
+    var $helpers = array('Form', 'Html', 'Session', 'Js');
+
+    public $components = array('Session','RequestHandler', 'UserAuth');
+
+    public $userAgent = '';
+
+    function beforeFilter() {
+        $this->userAgent = $this->getUserAgent();
+        $this->userAuth();
+    }
+
+    private function userAuth() {
+        $this->UserAuth->beforeFilter($this);
+    } 
+    
+    public function getUserAgent() {
+        $ua = $_SERVER['HTTP_USER_AGENT'];   
+        if(strpos($ua, 'MicroMessenger')!=FALSE) {
+            $ua = 'wechat';
+        }
+        return $ua;
+    }
 }
+
