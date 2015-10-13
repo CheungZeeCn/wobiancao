@@ -12,7 +12,7 @@ class Coupon extends AppModel {
  * @var mixed False or table name
  */
 	public $useTable = 'coupon';
-    public $belongsTo = array('shop');
+    public $belongsTo = array('Shop');
 
 /**
  * Display field
