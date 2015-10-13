@@ -386,3 +386,14 @@ Cache::config('_cake_model_', array(
 	'serialize' => ($engine === 'File'),
 	'duration' => $duration
 ));
+
+Configure::write('wechat', array(
+    'TOKEN' => 'w4z1edIen0M4JvPa',
+    'EncodingAESKey' => '4v7YlTKUASd9RhbFr0LadPPbtNIStq9Gml1dgJk3z80',
+    //'accessKeyFile' => '/tmp/izhuomi_wechat_access_token',
+    //'wechatServerIpListFile' => '/tmp/izhuomi_wechat_ip_list',
+    'appid' => 'wx81ea63d48d76cb00',
+    'appsecret' => '5dc18a69089ca059c9726427fe0acbce',
+));
+
+

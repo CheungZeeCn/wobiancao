@@ -66,8 +66,6 @@ class UserAuthComponent extends Component {
 		UsermgmtInIt($this);
         //todo make it more clear 
         // set user info here
-        if($c->userAgent == 'wechat') { // update location ?
-        }
 
 		$user = $this->__getActiveUser();
 
@@ -81,32 +79,95 @@ class UserAuthComponent extends Component {
 
 		$permissionFree = array('users/login', 'users/logout', 'users/register', 'users/userVerification', 'users/forgotPassword', 'users/activatePassword', 'pages/display', 'users/accessDenied', 'users/emailVerification', '/');
 
-        if (!$this->isLogged() ) { //redirect to login
-			App::import("Model", "User");
+        if (!$this->isLogged()) { //redirect to login
+		    App::import("Model", "User");
 			$userModel = new User;
-            $options = array('conditions' => array('id' => 1));
-			$myUser = $userModel->find("first", 'options');
-            $this->login($myUser);
-            //logged in 
+            if($c->userAgent == 'wechat') { // update location ?
+                App::import("Model", "WeChatDataModel");
+                $this->WeChatDataModel = new WeChatDataModel;    
+                App::import("Model", "WeChatUser");
+                $this->WechatUser = new WechatUser;  
+
+                $code = '';
+                if(array_key_exists('code', $_GET)) {
+                    if($_GET['code']=='code') {
+                        //redirect for the code
+                        $this->__redirectForCode();
+                    } else {
+                        $code = $_GET['code'];
+                    }
+                } else {
+                    $this->__redirectForCode();
+                }
+                $ret = $this->WeChatDataModel->getWebAcToken($code);
+                if($ret==NULL) {
+                    //again?
+                    $this->log("ERROR: try redirect again for code");
+                    $this->__redirectForCode();
+                }
+                $user = $this->WeChatDataModel->getUserByWebAcToken($ret->openid, $ret->access_token);
+                //$acToken = $ret->access_token;
+                //$rToken = $ret->refresh_token;
+                //$acExpr = $ret->expires_in;
+
+                $this->Session->write('wechatUserInfo', $user);
+                $wechatUserInfo = $user;
+                $openId=$ret->openid;
+
+                //1.find the user
+                $options = array("conditions" => array(
+                                    "open_id" => $openId, 
+                                    "remote_system" => "wechat"
+                                )
+                            );
+                $sysUser = $userModel->find('first', $options);
+                if($sysUser == NULL) {
+                    $userTpl = array( "User" => array(
+                                            "open_id" => $openId,
+                                            "remote_system" => "wechat",
+                                            "user_info_remote" => json_encode($user),
+                                            "username" => $user->nickname,
+                                            "users_pic_url" => $user->headimgurl,
+                                        )
+                    );
+                    $userModel->save($userTpl);   
+                    $sysUser = $userTpl;
+                } else {
+                    $sysUser['User']['username'] = $user->nickname;
+                    $sysUser['User']['users_pic_url'] = $user->headimgurl;
+                    $userModel->save($sysUser);   
+                }
+                //2.login the user
+                $this->login($sysUser);
+
+            } else {
+                $options = array('conditions' => array('id' => 1));
+			    $myUser = $userModel->find("first", 'options');
+                $this->login($myUser);
+                //logged in 
+            }
 
             $c->log('permission: actionUrl-'.$actionUrl, LOG_DEBUG);
             $c->Session->write('permission_error_redirect','/');
-            $c->Session->setFlash(__('您需要登陆才能看这个页面哦...'));
+            //$c->Session->setFlash(__('您需要登陆才能看这个页面哦...'));
             $cUrl = '/'.$c->params->url;
             if(!empty($_SERVER['QUERY_STRING'])) {
             	$rUrl = $_SERVER['REQUEST_URI'];
             	$pos =strpos($rUrl, $cUrl);
             	$cUrl=substr($rUrl, $pos, strlen($rUrl));
             }
-            $c->Session->write('Usermgmt.OriginAfterLogin', $cUrl);
-            $c->redirect('/');
+            //$c->Session->write('Usermgmt.OriginAfterLogin', $cUrl);
+            $c->redirect($cUrl);
+            echo "<h1> Please Login First </h1>";
+            exit(0);
+
         } else {//logged
             $this->setUser($c);
         }
 	}
 
 	/**
-	 * Used to set user in context of cakephp views
+	 * Used to set user in all context of cakephp views
 	 *
 	 * @access public
 	 * @return boolean
@@ -161,7 +222,7 @@ class UserAuthComponent extends Component {
 			$user = $type;
             //update last login
 			App::import("Model", "User");
-            //$user['User']['last_login'] = date("Y-m-d H:i:s");
+            $user['User']['last_logged_in'] = date("Y-m-d H:i:s");
 			$userModel = new User;
             $userModel->save($user);
 
@@ -274,5 +335,16 @@ class UserAuthComponent extends Component {
 	private function __useGuestAccount() {
 		return $this->login('guest');
 	}
+
+    private function __redirectForCode() {
+        if(array_key_exists('code', $this->c->request->query)) {
+            unset($this->c->request->query['code']);
+        }
+
+        $cUrl = rawurlencode(rtrim(Router::url('/', true), '/'). $this->c->request->here());
+        $fwdUrl = "https://open.weixin.qq.com/connect/oauth2/authorize?appid={$this->WeChatDataModel->appid}&redirect_uri={$cUrl}&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";
+        $this->log("DBUG:::".$cUrl);
+        $this->c->redirect($fwdUrl);
+    }
 
 }
