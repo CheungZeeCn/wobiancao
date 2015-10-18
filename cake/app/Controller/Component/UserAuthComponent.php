@@ -175,6 +175,7 @@ class UserAuthComponent extends Component {
 	public function setUser(&$c) {
 		$user = $this->Session->read('UserAuth');
         $c->set('_username', $user['User']['username']);
+        $c->set('_user', $user['User']);
 	}
 	/**
 	 * Used to check whether user is logged in or not

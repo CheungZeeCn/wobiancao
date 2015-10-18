@@ -22,7 +22,7 @@
 
 /** General Style Info **/
 body {
-	background: #003d4c;
+	background: #9E9C9C;
 	color: #fff;
 	font-family:'lucida grande',verdana,helvetica,arial,sans-serif;
 	font-size:90%;
@@ -97,10 +97,10 @@ p {
 	text-decoration: underline;
 }
 #content{
-	background: #fff;
+	background: #9E9C9C;
 	clear: both;
 	color: #333;
-	padding: 10px 20px 40px 20px;
+	/*padding: 10px 20px 40px 20px;*/
 	overflow: auto;
 }
 #footer {

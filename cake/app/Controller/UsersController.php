@@ -14,7 +14,7 @@ class UsersController extends AppController {
  * @var array
  */
 	public $components = array('Paginator');
-    public $uses = array('User', 'UserHasCoupon', 'UserFollowShop', 'Shop');
+    public $uses = array('User', 'UserHasCoupon', 'UserFollowShop', 'Shop', 'Coupon');
 
 /**
  * index method
@@ -42,6 +42,19 @@ class UsersController extends AppController {
 //	}
 
 	public function viewMyPage() {
+        $this->recursive = 0;
+        $userId = $this->UserAuth->getUserId();
+
+        $options = array('conditions' => array('user_id' => $userId));
+
+        $count = $this->UserHasCoupon->find('count', $options);
+		$user = $this->User->findById($userId);
+        $this->set('user', $user);
+        $this->set('count', $count);
+	}
+
+	public function viewMyPage2() {
+        $this->layout = "default_2";
         $this->recursive = 0;
         $userId = $this->UserAuth->getUserId();
 
@@ -89,6 +102,8 @@ class UsersController extends AppController {
 
 	public function viewMyCoupons() {
         $this->User->recursive = 2;
+        //$this->Coupon->recursive = 2;
+        //$this->UserHasCoupon->recursive = 2;
         $this->User->bindModel(
             array(
                 'hasMany' => array(
@@ -99,19 +114,24 @@ class UsersController extends AppController {
                 )
             )
         );
-        $this->Shop->bindModel(
+        $this->Coupon->bindModel(
             array(
                 'hasMany' => array(
                     'UserHasCoupon' => array(
                         'className' => 'UserHasCoupon'
                     )
-                )
+                ),  
+                'belongsTo' => array(
+                    'Shop' => array(
+                        'className' => 'Shop',
+                    ),
+                ),
             )
         );
         $this->UserHasCoupon->bindModel(
             array(
                 'belongsTo' => array(
-                    'User', 'Shop'   
+                    'User', 'Coupon' 
                 )
             )
         );
@@ -119,7 +139,22 @@ class UsersController extends AppController {
         $userId = $this->UserAuth->getUserId();
 		$user = $this->User->findById($userId);
 
+        $couponIds = array();
+        foreach($user['UserHasCoupon'] as $v) {
+            $couponIds[]= $v['coupon_id'];        
+        }
+        $options = array('conditions' => array('Coupon.id' => $couponIds));
+        $couponsOri = $this->Coupon->find('all', $options);
+        
+        $coupons = array();
+        foreach($couponsOri as $v) {
+            $coupons[$v['Coupon']['id']] = $v;    
+        }
+
+
+        $this->set('count', count($user['UserHasCoupon']));
         $this->set('user', $user);
+        $this->set('coupons', $coupons);
 	}
 
 /**

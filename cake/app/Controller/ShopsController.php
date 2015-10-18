@@ -30,7 +30,10 @@ class ShopsController extends AppController {
         $msg = "OK";
         $status = "OK";
         $userId = $this->UserAuth->getUserId();
-	    if(!$this->UserFollowShop->deleteUserFollow($userId, $id))  {
+		if (!$this->Shop->exists($id)) {
+            $status = "ERROR";
+            $msg = "shop id error";
+		} elseif(!$this->UserFollowShop->deleteUserFollow($userId, $id))  {
             $status = "ERROR";
             $msg = "error in cleaning step in adding";
         } elseif(!$this->UserFollowShop->addUserFollow($userId, $id)) {
@@ -45,7 +48,10 @@ class ShopsController extends AppController {
         $msg = "OK";
         $status = "OK";
         $userId = $this->UserAuth->getUserId();
-	    if(!$this->UserFollowShop->deleteUserFollow($userId, $id))  {
+		if (!$this->Shop->exists($id)) {
+            $status = "ERROR";
+            $msg = "shop id error";
+	    }elseif(!$this->UserFollowShop->deleteUserFollow($userId, $id))  {
             $status = "ERROR";
             $msg = "error in deleting";
         } 

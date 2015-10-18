@@ -1,0 +1,329 @@
+.wbc-profile-userpic img {
+  float: none;
+  margin: 0 auto;
+  width: 25%;
+  height: 25%;
+  -webkit-border-radius: 50% !important;
+  -moz-border-radius: 50% !important;
+  border-radius: 50% !important;
+}
+
+
+.wbc-profile-sidebar-portlet {
+  padding: 5px 0 0 0 !important;
+}
+
+.wbc-profile-userbuttons {
+  text-align: center;
+  margin-top: 5px;
+}
+
+.wbc-btn-sm {
+  font-size: 8px;
+  line-height: 1.5;
+  padding: 4px 10px 5px;
+}
+
+
+.wbc-profile-usermenu {
+  margin-top: 10px;
+  padding-bottom: 20px;
+}
+
+.wbc-profile-usermenu ul li {
+  border-bottom: 1px solid #f0f4f7;
+  margin-bottom: 3px;
+  background-color: #ffffff;
+  height:50px;
+}
+
+.wbc-profile-usermenu ul li a i {
+  margin-right: 8px;
+  font-size: 16px;
+}
+
+.wbc-profile-usermenu ul li a:hover {
+  background-color: #ffffff;
+  color: #5b9bd1;
+}
+
+.wbc-profile-usermenu ul li a {
+  color: #5b9bd1;
+  background-color: #ffffff;
+  /*border-left: 2px solid #5b9bd1;*/
+  margin-left: -2px;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.coupon-main {
+    position:absolute;
+    display:inline-block;
+    height:50px;
+    right: 53px;
+    left: 0px;
+}
+.coupon-right {
+    float:right;
+    width:53px;
+    height:50px;
+    border-left: 3px dotted #EFF3F8;
+}
+
+
+.coupon-shop-logo {
+    height:100%;
+    float:left;
+    width:50px;
+}
+
+.coupon-desp {
+    float:left;
+    height:100%;
+}
+
+.coupon-heart {
+    height:100%;
+    float:right;
+    width:50px;
+}
+/*
+.wbc-shop-item-cube-container {
+    width:100%;
+    padding-left:1%;
+    -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box; 
+}
+
+.wbc-shop-item-cube {
+    width: 32%;
+    height: auto;
+    background-size: cover;
+    background-position: center center;
+    float: left;
+    margin-right: 1%;
+}
+
+.wbc-shop-item-cube img{
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+}
+*/
+
+.wbc-shop-item-cube {
+    width: 31%;
+    padding-bottom: 31%; /* = width for a square aspect ratio */
+}
+
+.square {
+    float:left;
+    position: relative;
+    width: 32%;
+    padding-bottom : 32%; /* = width for a 1:1 aspect ratio */
+    margin:0.66%;
+    /*background-color:#1E1E1E;*/
+    background-color:#FFF;
+    overflow:hidden;
+}
+
+.content {
+    position:absolute;
+    height:90%; /* = 100% - 2*5% padding */
+    width:90%; /* = 100% - 2*5% padding */
+    padding: 5%;
+    
+}
+
+/*  For responsive images */
+
+.content .rs{
+    width:auto;
+    height:auto;
+    max-height:90%;
+    max-width:100%;
+}
+/*  For responsive images as background */
+
+.bg{
+    background-position:center center;
+    background-repeat:no-repeat;
+    background-size:cover; /* you change this to "contain" if you don't want the images to be cropped */
+    color:#fff;
+}
+
+.img1{
+    background-image: url('https://farm3.staticflickr.com/2827/10384422264_d9c7299146.jpg');
+}
+.img2{
+    background-image: url('https://farm7.staticflickr.com/6217/6216951796_e50778255c.jpg');
+}
+.img3{
+    background-image: url('https://farm4.staticflickr.com/3794/13893055574_3df0ab636b.jpg');
+}
+
+/*  following just for the demo */
+
+
+.numbers{
+    font-weight:900;
+    font-size:100px;
+}
+
+.wbc-user-follow-shop-username {
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.wbc-user-coupon-head {
+    width:100%;
+    background-color:#fff;
+    height:auto;
+    padding:10px;
+    -webkit-transform-style: preserve-3d;
+     -moz-transform-style: preserve-3d;
+     transform-style: preserve-3d;
+}
+
+.wbc-user-coupon-userpic{
+    width:30%;
+    float:left;
+}
+
+.wbc-user-coupon-userpic img {
+  width: 80%;
+  height: 80%;
+  -webkit-border-radius: 50% !important;
+  -moz-border-radius: 50% !important;
+  border-radius: 50% !important;
+}
+
+.wbc-user-coupon-userdesp {
+    position:absolute;
+    width:70%;
+    left:30%;
+    top:25%;transform: translateY(25%);
+}
+
+.wbc-user-coupon-userdesp-name {
+    font-size:16px;
+    color:#4D4D4D;
+    font-weight:bold;
+}
+
+.wbc-user-coupon-userdesp-times {
+    font-size:15px;
+}
+
+.wbc-user-coupon-list {
+  margin-top: 10px;
+  padding-bottom: 20px;
+}
+
+.wbc-user-coupon-list ul li {
+  border-bottom: 1px solid #f0f4f7;
+  margin-bottom: 3px;
+  background-color: #ffffff;
+  height:60px;
+}
+
+.wbc-user-coupon-list ul li a i {
+  margin-right: 8px;
+  font-size: 16px;
+}
+
+.wbc-user-coupon-list ul li a:hover {
+  background-color: #ffffff;
+  color: #5b9bd1;
+}
+
+.wbc-user-coupon-list ul li a {
+  color: #5b9bd1;
+  background-color: #ffffff;
+  /*border-left: 2px solid #5b9bd1;*/
+  margin-left: -2px;
+  font-size: 16px;
+  font-weight: 400;
+  padding:0;
+}
+
+.user-coupon-list-shop-name {
+    padding:20px 0 20px 0;
+    color:#4D4D4D;
+    font-weight:bold;
+}
+
+.user-coupon-list-coupon-desp {
+    padding:20px 0 20px 0;
+    color:#4D4D4D;
+    font-weight:bold;
+}
+
+.user-coupon-list-shop-logo {
+    height:100%;
+}
+
+.user-coupon-list-shop-logo img{
+  margin-top:5px;
+  margin-bottom:5px;
+  margin-right:5px;
+  height: 50px;
+  -webkit-border-radius: 50% !important;
+  -moz-border-radius: 50% !important;
+  border-radius: 50% !important;
+}
+
+.wbc-usermain-container {
+}
+
+.wbc-usermain-username {
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.usermain-jieshengguanzhu {
+    margin-top:60px;
+}
+.usermain-fenxiang {
+    margin-top:60px;
+}
+
+.usermain-jieshengguanzhu ul li {
+  border-bottom: 1px solid #f0f4f7;
+  margin-bottom: 3px;
+  background-color: #ffffff;
+  height:60px;
+}
+
+.usermain-jieshengguanzhu ul li a i {
+  margin-right: 8px;
+  font-size: 16px;
+}
+
+.usermain-jieshengguanzhu ul li a:hover {
+  background-color: #ffffff;
+  color: #5b9bd1;
+}
+
+.usermain-jieshengguanzhu ul li a {
+  color: #5b9bd1;
+  background-color: #ffffff;
+  /*border-left: 2px solid #5b9bd1;*/
+  margin-left: -2px;
+  font-size: 16px;
+  font-weight: 400;
+  padding:0;
+}
+
+.usermain-list-li {
+    padding-left:20px;
+}
+
+.usermain-list-item-icon {
+  padding: 10px;
+  font-size: 30px;
+}
+

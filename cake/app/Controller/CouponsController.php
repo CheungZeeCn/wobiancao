@@ -14,7 +14,7 @@ class CouponsController extends AppController {
  * @var array
  */
 	public $components = array('Paginator', 'RequestHandler');
-    public $uses = array( 'Coupon', 'UserLikeCoupon', 'UserHasCoupon');
+    public $uses = array( 'Coupon', 'UserLikeCoupon', 'UserHasCoupon', 'CouponsCategory');
 
 
 /**
@@ -106,15 +106,22 @@ class CouponsController extends AppController {
             $likedIdList[] = $l['UserLikeCoupon']['coupon_id'];
         }
 
+        $categories = $this->CouponsCategory->find('all');
+        $timeNow = date("Y-m-d H:i:s\n");
+
 		$this->Coupon->recursive = 1;
         if($cId == 0) {
             $options = array( 
-                'order' => 'like desc'
+                'order' => 'like desc',
+                'conditions' => array(
+                    'datetime_end >' => $timeNow,
+                ),
             );
         } else {
             $options = array( 
                 'conditions' => array(
-                    'coupon_category' => $cId
+                    'coupon_category' => $cId,
+                    'datetime_end >' => $timeNow,
                 ),
                 'order' => 'like desc'
             );
@@ -129,6 +136,7 @@ class CouponsController extends AppController {
         }
 
         $this->set('coupons', $coupons);
+        $this->set('categories', $categories);
         $this->set('userId', $userId);
         $this->set('likedList', $likedList);
 	}
