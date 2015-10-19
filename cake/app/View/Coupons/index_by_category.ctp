@@ -28,7 +28,7 @@
         </div>
                             <!-- END SIDEBAR BUTTONS -->
                             <!-- SIDEBAR MENU -->
-                            <div class="wbc-profile-usermenu">
+                            <div class="wbc-profile-usermenu col-md-12 ">
                                 <ul class="nav">
                                   <?php foreach($coupons as $k => $v) { ?>
                                     <li class="" style="display:block;position:relative">
