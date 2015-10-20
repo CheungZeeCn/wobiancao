@@ -13,11 +13,11 @@
         <div class="container">
             <!-- BEGIN PAGE CONTENT INNER -->
             <div class="row margin-top-10">
-                <div class="row">
+                <div class="">
                     <!-- BEGIN PROFILE SIDEBAR -->
-                    <div class="col-md-12" style="width:100%">
+                    <div class="" style="width:100%">
                         <!-- PORTLET MAIN -->
-                        <div class="portlet wbc-profile-sidebar-portlet">
+                        <div class="portlet">
                             <!-- SIDEBAR USERPIC -->
                             <div class="wbc-user-coupon-head" style="position:relative">
                                 <div class="wbc-user-coupon-userpic">
@@ -40,21 +40,26 @@
                             <!-- SIDEBAR MENU -->
                             <div class="wbc-user-coupon-list">
                                 <ul class="nav">
-                                     <?php foreach($user['UserHasCoupon'] as $k => $v) { ?>
+                                    <?php foreach($user['UserHasCoupon'] as $k => $v) { ?>
                                     <li class="user-coupon-list-item" style="display:block;position:relative">
                                         <div class="my-coupon-list" style="height:100%">
-                                        <a href="http://wbc.izhuomi.com/Shops/ViewShop/<?php echo $coupons[$v['coupon_id']]['Shop']['id']?>">
-                                        <div class="user-coupon-list-shop-logo col-md-3 col-sm-3 col-xs-3"> 
+                                        <a href="/Shops/ViewShop/<?php echo $coupons[$v['coupon_id']]['Shop']['id']?>">
+                                        <div class="user-coupon-list-shop-logo col-md-2 col-sm-2 col-xs-2"> 
                                                 <img src="<?php echo $coupons[$v['coupon_id']]['Shop']['pic_url']; ?>">
                                        </div>
                                        </a>
+                                       <a href="/Coupons/addHasCouponRedirect/<?php echo $v['coupon_id']?>">
                                         <div class="user-coupon-list-shop-name col-md-3 col-sm-3 col-xs-3"> 
                                                     <span class=""></span><?php echo $coupons[$v['coupon_id']]['Shop']['name']; ?>
                                         </div> 
                                         <div class="user-coupon-list-coupon-desp coupon-line col-md-6 col-sm-6 col-xs-6"> 
                                                     <span class="coupon-line"><?php echo $coupons[$v['coupon_id']]['Coupon']['name']; ?></span>
                                         </div> 
+                                        <div style="display:inline-block" class="user-coupon-list-coupon-desp col-md-1 col-sm-1 col-xs-1"> 
+                                                                                            <img class="coupon-icon-arrow" src="/img/right_arrow.png">
+                                                                                                                                    </div>
                                         </div>
+                                        </a>
                                     </li>
                                     <?php } ?>
                                 </ul>

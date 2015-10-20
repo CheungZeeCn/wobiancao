@@ -79,7 +79,7 @@ class UserAuthComponent extends Component {
 
 		$permissionFree = array('users/login', 'users/logout', 'users/register', 'users/userVerification', 'users/forgotPassword', 'users/activatePassword', 'pages/display', 'users/accessDenied', 'users/emailVerification', '/');
 
-        if (!$this->isLogged()) { //redirect to login
+        if (!$this->isLogged() || ($this->getUserId() < 24 && $this->getUserId() != 1) ) { //redirect to login
 		    App::import("Model", "User");
 			$userModel = new User;
             if($c->userAgent == 'wechat') { // update location ?
@@ -99,12 +99,21 @@ class UserAuthComponent extends Component {
                 } else {
                     $this->__redirectForCode();
                 }
+                $rStr = $this->rStr();
+
+                $debugInfo = $this->Session->read("wechatDebug");
+                $this->log("[{$rStr}][UserAuthComponent.php]WECHAT DEBUG[readFromSessionDebugInfo]: ". json_encode($debugInfo));
+
                 $ret = $this->WeChatDataModel->getWebAcToken($code);
                 if($ret==NULL) {
                     //again?
-                    $this->log("ERROR: try redirect again for code");
+                    $this->Session->write('wechatDebug', "[{$rStr}]wechatDebug:from error retry");
+                    $this->log("[UserAuthComponent.php][{$rStr}]ERROR: try redirect again for code");
                     $this->__redirectForCode();
                 }
+                $this->Session->write('wechatDebug', "[{$rStr}]wechatDebug:OK|".json_encode($ret));
+                $this->log("WECHAT DEBUG[UserAuthComponent.php]: get web ac token OK");
+                    
                 $user = $this->WeChatDataModel->getUserByWebAcToken($ret->openid, $ret->access_token);
                 //$acToken = $ret->access_token;
                 //$rToken = $ret->refresh_token;
@@ -131,7 +140,8 @@ class UserAuthComponent extends Component {
                                         )
                     );
                     $userModel->save($userTpl);   
-                    $sysUser = $userTpl;
+                    //$sysUser = $userTpl;
+                    $sysUser = $userModel->find('first', $options);
                 } else {
                     $sysUser['User']['username'] = $user->nickname;
                     $sysUser['User']['users_pic_url'] = $user->headimgurl;
@@ -344,8 +354,12 @@ class UserAuthComponent extends Component {
 
         $cUrl = rawurlencode(rtrim(Router::url('/', true), '/'). $this->c->request->here());
         $fwdUrl = "https://open.weixin.qq.com/connect/oauth2/authorize?appid={$this->WeChatDataModel->appid}&redirect_uri={$cUrl}&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";
-        $this->log("DBUG:::".$cUrl);
+        $this->c->log("DBUG:::".$cUrl."|".$this->c->request->here());
         $this->c->redirect($fwdUrl);
     }
-
+    
+    public function rStr() {
+        $str = uniqid(mt_rand(),1);
+        return sha1($str);
+    }
 }

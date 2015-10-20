@@ -14,8 +14,8 @@
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
-$cakeDescription = __d('cake_dev', '窝边草');
-$cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
+//$cakeDescription = __d('cake_dev', '窝边草');
+//$cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 ?>
 <!DOCTYPE html>
 <html>
@@ -24,13 +24,10 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 	<title>
-		<?php //echo $cakeDescription ?>:
-
-		<?php //echo $this->fetch('title'); ?>
-		<?php echo "窝边草";?>:
+        窝边草
 	</title>
 	<?php
-		echo $this->Html->meta('icon');
+		//echo $this->Html->meta('icon');
 
         echo $this->Html->css('components-rounded'); 
         echo $this->Html->css('bootstrap.min');
@@ -44,9 +41,9 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
         echo $this->Html->script('bootstrap.min');
         echo $this->Html->script('wbc');
 
-		echo $this->fetch('meta');
-		echo $this->fetch('css');
-		echo $this->fetch('script');
+		//echo $this->fetch('meta');
+		//echo $this->fetch('css');
+		//echo $this->fetch('script');
 	?>
 </head>
 <body>

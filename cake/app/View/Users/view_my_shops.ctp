@@ -30,8 +30,17 @@
                             <!-- END SIDEBAR BUTTONS -->
                             <!-- SIDEBAR MENU -->
                             <div class="wbc-shop-item-cube-container">
+                                <?php if(count($user['UserFollowShop']) == 0) { ?>
+                                        <hr> </hr>
+                                        <div class="porlet" > 
+                                            暂时没有收藏的店铺，去看看什么火？ 
+                                            <a href="/Coupons/indexByCategory"> 走起 >> </a>
+                                        </div>
+                                <?php }?>
+                               
+
                                 <?php foreach($user['UserFollowShop'] as $v) { ?>
-                                    <a href="http://wbc.izhuomi.com/Shops/ViewShop/<?php echo $v['Shop']['id']?>">
+                                    <a href="/Shops/ViewShop/<?php echo $v['Shop']['id']?>">
                                         <div class="square bg" style="background-image:url( <?php echo $v['Shop']['pic_url']?> )">
                                         </div> 
                                     </a>

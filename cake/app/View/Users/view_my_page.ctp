@@ -35,7 +35,7 @@
                                     <li style="display:block;position:relative" class="usermain-list-li">
                                         <a href="<?php echo $this->Html->url("/Users/viewMyCoupons");  ?>">
                                         <div style="display:inline-block" class="usermain-list-item-icon col-md-2 col-sm-2 col-xs-2"> 
-                                            <span><i class="fa fa-money" style="font-size:30px"></i></span>
+                                            <img class="coupon-icon" src="/img/save_icon.png"></img>
                                         </div> 
                                         <div style="display:inline-block" class="user-coupon-list-shop-name col-md-7 col-sm-7 col-xs-7"> 
                                                     <span class="">节省</span>
@@ -44,14 +44,14 @@
                                                     <span class=""><?php echo $count; ?>次</span>
                                         </div> 
                                         <div style="display:inline-block" class="user-coupon-list-coupon-desp col-md-1 col-sm-1 col-xs-1"> 
-                                                    <span class=""> ></span>
+                                                    <img class="coupon-icon-arrow" src="/img/right_arrow.png"></img>
                                         </div> 
                                         </a>
                                     </li>
                                     <li style="display:block;position:relative" class="usermain-list-li">
                                         <a href=" <?php echo $this->Html->url("/Users/viewMyShops");  ?> ">
                                         <div style="display:inline-block" class="usermain-list-item-icon col-md-2 col-sm-2 col-xs-2"> 
-                                            <span><i class="fa fa-plus-square" style="font-size:30px"></i></span>
+                                            <img class="coupon-icon" src="/img/follow_icon.png"></img>
                                         </div> 
                                         <div style="display:inline-block" class="user-coupon-list-shop-name col-md-7 col-sm-7 col-xs-7"> 
                                                     <span class="">关注</span>
@@ -60,7 +60,7 @@
                                                     <span class=""></span>
                                         </div> 
                                         <div style="display:inline-block" class="user-coupon-list-coupon-desp col-md-1 col-sm-1 col-xs-1"> 
-                                                    <span class=""> ></span>
+                                                    <img class="coupon-icon-arrow" src="/img/right_arrow.png"></img>
                                         </div> 
                                         </a>
                                     </li>

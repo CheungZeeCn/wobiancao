@@ -13,7 +13,7 @@
     <div class="page-content">
         <div class="container">
             <div class="row margin-top-10">
-                <div class="col-md-12">
+                <div class="">
                     <!-- BEGIN PROFILE SIDEBAR -->
                     <div class="profile-sidebar" style="width: 250px;">
                         <!-- PORTLET MAIN -->
@@ -45,8 +45,8 @@
                                                 <div class="col-xs-2 coupon-shop-logo">
                                                     <img class="coupon-logo-img" src="<?php echo $shop['Shop']['pic_url'] ?>" >
                                                     <div class="coupon-geted-heart text-center">
-                                                        <i class="fa fa-heart" style
-                                                            ="font-size:14px;width:100%;color:#e84b3c"><?php echo $v['like'] ?></i>    
+                                                        <i class="fa fa-heart" id="coupon_id_like_<?php echo $v['id'];?>" style
+                                                            ="font-size:11px;width:100%;color:#e84b3c"><?php echo $v['like'] ?></i>    
                                                     </div>
                                                 </div>
                                                 <div class="col-xs-7 coupon-desp">
@@ -55,18 +55,18 @@
                                                 </div>
                                                 <?php 
                                                     if($v['iLiked']) { ?>
-                                                        <div id="coupon_id_<?php echo $v['id'];?>" class="coupon-heart coupon-liked" onclick="pressLikeInViewShop(<?php echo $v['id']?>)">
-                                                           <a> <i class="fa fa-heart"></i> </a>
+                                                        <div id="coupon_id_<?php echo $v['id'];?>" class="col-xs-1 coupon-heart coupon-liked" onclick="pressLikeInViewCoupon(<?php echo $v['id']?>)">
+                                                           <a> <i class="fa fa-heart coupon-heart-i" style="font-size:17px;"></i> </a>
                                                         </div>
                                                 <?php } else { ?>
-                                                        <div id="coupon_id_<?php echo $v['id'];?>" class="coupon-heart coupon-unliked" onclick="pressLikeInViewShop(<?php echo $v['id']?>)">
-                                                           <a> <i class="fa fa-heart"></i> </a>
+                                                        <div id="coupon_id_<?php echo $v['id'];?>" class="col-xs-1 coupon-heart coupon-unliked" onclick="pressLikeInViewCoupon(<?php echo $v['id']?>)">
+                                                           <a> <i class="fa fa-heart coupon-heart-i" style="font-size:17px;"></i> </a>
                                                         </div>
                                                 <?php } ?>
                                         </div>
                                         <div class="coupon-right">
                                             <div class="coupon-right wbc-profile-userbuttons">
-                                               <a href="http://wbc.izhuomi.com/Coupons/addHasCouponRedirect/<?php echo $v['id'] ?>" <button type="button" class="btn btn-default btn-circle wbc-btn-item">去领券</button></a>
+                                               <a href="/Coupons/addHasCouponRedirect/<?php echo $v['id'] ?>" <button type="button" class="btn btn-default btn-circle wbc-btn-item">去领券</button></a>
                                             </div>
                                         </div>
                                         <div class="clearfix">
