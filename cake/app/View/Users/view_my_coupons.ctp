@@ -40,7 +40,9 @@
                             <!-- SIDEBAR MENU -->
                             <div class="wbc-user-coupon-list">
                                 <ul class="nav">
-                                    <?php foreach($user['UserHasCoupon'] as $k => $v) { ?>
+                                    <?php foreach($user['UserHasCoupon'] as $k => $v) { 
+                                        if(!array_key_exists($v['coupon_id'], $coupons)) { continue; }
+                                    ?>
                                     <li class="user-coupon-list-item" style="display:block;position:relative">
                                         <div class="my-coupon-list" style="height:100%">
                                         <a href="/Shops/ViewShop/<?php echo $coupons[$v['coupon_id']]['Shop']['id']?>">
@@ -58,6 +60,34 @@
                                         <div style="display:inline-block" class="user-coupon-list-coupon-desp col-md-1 col-sm-1 col-xs-1"> 
                                                                                             <img class="coupon-icon-arrow" src="/img/right_arrow.png">
                                                                                                                                     </div>
+                                        </div>
+                                        </a>
+                                    </li>
+                                    <?php } ?>
+                                </ul>
+                            </div>
+
+                            <div class="wbc-user-coupon-list">
+                                <ul class="nav">
+                                    <?php foreach($user['UserHasCoupon'] as $k => $v) { 
+                                        if(!array_key_exists($v['coupon_id'], $outdatedCoupons)) { continue; }
+                                    ?>
+                                    <li class="user-coupon-list-item" style="display:block;position:relative">
+                                        <div class="my-coupon-list" style="height:100%">
+                                        <a href="/Shops/ViewShop/<?php echo $outdatedCoupons[$v['coupon_id']]['Shop']['id']?>">
+                                        <div class="user-coupon-list-shop-logo col-md-2 col-sm-2 col-xs-2"> 
+                                                <img src="<?php echo $outdatedCoupons[$v['coupon_id']]['Shop']['pic_url']; ?>">
+                                       </div>
+                                       </a>
+                                       <a href="/Coupons/addHasCouponRedirect/<?php echo $v['coupon_id']?>">
+                                        <div class="user-coupon-list-shop-name col-md-3 col-sm-3 col-xs-3"> 
+                                                    <span class=""></span><?php echo $outdatedCoupons[$v['coupon_id']]['Shop']['name']; ?>
+                                        </div> 
+                                        <div class="user-coupon-list-coupon-desp coupon-line col-md-6 col-sm-6 col-xs-6"> 
+                                            <span class="coupon-line"><?php echo $outdatedCoupons[$v['coupon_id']]['Coupon']['name']; ?></span>
+                                        </div> 
+                                        <div style="display:inline-block；height:100%;padding-top:18px;" class="user-coupon-list-coupon-desp col-md-1 col-sm-1 col-xs-1"> 
+                                            <div style="font-size:9px;width:10px;">过期</div>   
                                         </div>
                                         </a>
                                     </li>

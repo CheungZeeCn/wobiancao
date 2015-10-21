@@ -64,14 +64,14 @@
                                                     <img class="coupon-logo-img" src="<?php echo $v['Shop']['pic_url'] ?>" >
                                                     </a>
                                                     <div class="coupon-geted-heart">
-                                                        <i id="coupon_id_like_<?php echo $v['Coupon']['id'];?>" class="fa fa-heart" style="font-size:11px;width:100%;color:#e84b3c"><?php echo $v['Coupon']['like'] ?></i>    
+                                                        <div id="coupon_id_like_<?php echo $v['Coupon']['id'];?>" style="width:100%;text-align:center;"><span style="font-size:9px;color:#797979">已领</span><span style="font-size:11px;color:#e84b3c"><?php echo $v['Coupon']['has_count'] ?></span></div>    
                                                     </div>
                                                 </div>
                                                 <div class="col-xs-7 coupon-desp">
                                                     <p class="coupon-desp-description coupon-line"><?php echo $v['Coupon']['name'] ?></p>
                                                     <p class="coupon-desp-discount coupon-line"><?php echo $v['Coupon']['slogan'] ?></p>
                                                 </div>
-                                                <?php 
+                                                <!-- <?php 
                                                     if($v['Coupon']['iLiked']) { ?>
                                                         <div id="coupon_id_<?php echo $v['Coupon']['id'];?>" class="col-xs-1 coupon-heart coupon-liked" onclick="pressLikeInViewCoupon(<?php echo $v['Coupon']['id']?>)">
                                                            <a> <i class="fa fa-heart coupon-heart-i" style="font-size:17px"></i> </a>
@@ -81,6 +81,7 @@
                                                            <a> <i class="fa fa-heart coupon-heart-i" style="font-size:17px"></i> </a>
                                                         </div>
                                                 <?php } ?>
+                                                -->
                                         </div>
                                         <div class="coupon-right">
                                             <div class="coupon-right wbc-profile-userbuttons">
@@ -96,6 +97,8 @@
             </div>
     </div>
 </div>
+
+
 <script>
  jQuery(document).ready(function() {
      // initiate layout and plugins

@@ -26,7 +26,7 @@ class Shop extends AppModel {
     public $hasMany = array(
         'Coupon' => array(
             'className' => 'Coupon',
-            'order' => 'Coupon.like DESC', 
+            'order' => 'Coupon.has_count DESC', 
             'foreignKey' => 'shop_id', 
             'conditions' => array(
             ),

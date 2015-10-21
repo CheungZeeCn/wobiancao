@@ -146,15 +146,22 @@ class UsersController extends AppController {
         $options = array('conditions' => array('Coupon.id' => $couponIds));
         $couponsOri = $this->Coupon->find('all', $options);
         
+        $timeNow = date("Y-m-d H:i:s\n");
         $coupons = array();
+        $outdatedCoupons = array();
         foreach($couponsOri as $v) {
-            $coupons[$v['Coupon']['id']] = $v;    
+            if(strtotime($v['Coupon']['datetime_end']) <= strtotime($timeNow) ) {//outdated
+                $outdatedCoupons[$v['Coupon']['id']] = $v;    
+            } else {
+                $coupons[$v['Coupon']['id']] = $v;    
+            }
         }
 
 
         $this->set('count', count($user['UserHasCoupon']));
         $this->set('user', $user);
         $this->set('coupons', $coupons);
+        $this->set('outdatedCoupons', $outdatedCoupons);
 	}
 
 /**

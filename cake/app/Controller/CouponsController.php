@@ -38,6 +38,11 @@ class CouponsController extends AppController {
 	    elseif(!$this->UserHasCoupon->addUserHas($userId, $id)) {
             $status = "ERROR";
             $msg = "error in adding step in adding";
+        } elseif(!$this->Coupon->updateAll(
+                array('Coupon.has_count' => 'Coupon.has_count+1'), 
+                array('Coupon.id' => $id))) {
+            $status = "ERROR";
+            $msg = "error in counting step in adding";
         }
         $this->set(array('msg'=>$msg, "status"=>$status, 
             '_serialize' => array("status", "msg")));  
@@ -54,6 +59,11 @@ class CouponsController extends AppController {
 	    elseif(!$this->UserHasCoupon->addUserHas($userId, $id)) {
             $status = "ERROR";
             $msg = "error in adding step in adding";
+        } elseif(!$this->Coupon->updateAll(
+                array('Coupon.has_count' => 'Coupon.has_count+1'), 
+                array('Coupon.id' => $id))) {
+            $status = "ERROR";
+            $msg = "error in counting step in adding";
         }
         $coupon = $this->Coupon->findById($id);
         $this->redirect($coupon['Coupon']['third_url']);
@@ -112,7 +122,7 @@ class CouponsController extends AppController {
 		$this->Coupon->recursive = 1;
         if($cId == 0) {
             $options = array( 
-                'order' => 'like desc',
+                'order' => 'has_count desc',
                 'conditions' => array(
                     'datetime_end >' => $timeNow,
                 ),
@@ -123,7 +133,7 @@ class CouponsController extends AppController {
                     'coupon_category' => $cId,
                     'datetime_end >' => $timeNow,
                 ),
-                'order' => 'like desc'
+                'order' => 'has_count desc'
             );
         }
 

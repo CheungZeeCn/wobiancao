@@ -45,14 +45,14 @@
                                                 <div class="col-xs-2 coupon-shop-logo">
                                                     <img class="coupon-logo-img" src="<?php echo $shop['Shop']['pic_url'] ?>" >
                                                     <div class="coupon-geted-heart text-center">
-                                                        <i class="fa fa-heart" id="coupon_id_like_<?php echo $v['id'];?>" style
-                                                            ="font-size:11px;width:100%;color:#e84b3c"><?php echo $v['like'] ?></i>    
+                                                        <div id="coupon_id_like_<?php echo $v['id'];?>" style="width:100%;text-align:center;"><span style="font-size:9px;color:#797979">已领</span><span style="font-size:11px;color:#e84b3c"><?php echo $v['has_count'] ?></span></div>    
                                                     </div>
                                                 </div>
                                                 <div class="col-xs-7 coupon-desp">
                                                     <p class="coupon-desp-description coupon-line"><?php echo $v['name'] ?></p>
                                                     <p class="coupon-desp-discount coupon-line"><?php echo $v['slogan'] ?></p>
                                                 </div>
+                                                <!--
                                                 <?php 
                                                     if($v['iLiked']) { ?>
                                                         <div id="coupon_id_<?php echo $v['id'];?>" class="col-xs-1 coupon-heart coupon-liked" onclick="pressLikeInViewCoupon(<?php echo $v['id']?>)">
@@ -63,6 +63,7 @@
                                                            <a> <i class="fa fa-heart coupon-heart-i" style="font-size:17px;"></i> </a>
                                                         </div>
                                                 <?php } ?>
+                                                -->
                                         </div>
                                         <div class="coupon-right">
                                             <div class="coupon-right wbc-profile-userbuttons">
