@@ -13,6 +13,7 @@ class Coupon extends AppModel {
  */
 	public $useTable = 'coupon';
     public $belongsTo = array('Shop');
+    public $hasMany = array('CouponTag');
 
 /**
  * Display field

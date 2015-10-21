@@ -97,6 +97,80 @@ class CouponsController extends AppController {
             '_serialize' => array("status", "msg")));  
     }
 
+	public function indexByCategory2($cId = 0, $tag="") {
+        $userId = $this->UserAuth->getUserId();
+
+        $likedList = $this->UserLikeCoupon->find('all', array('conditions'=>array('user_id' => $userId)));    
+        $likedIdList = array(); 
+        foreach($likedList as $l) {
+            $likedIdList[] = $l['UserLikeCoupon']['coupon_id'];
+        }
+
+        $categories = $this->CouponsCategory->find('all');
+        $timeNow = date("Y-m-d H:i:s\n");
+
+		$this->Coupon->recursive = 1;
+        if($cId == 0) {
+            $options = array( 
+                'order' => 'like desc',
+                'conditions' => array(
+                    'datetime_end >' => $timeNow,
+                ),
+            );
+        } else {
+            $options = array( 
+                'conditions' => array(
+                    'coupon_category' => $cId,
+                    'datetime_end >' => $timeNow,
+                ),
+                'order' => 'like desc'
+            );
+        }
+
+        //tags
+        $tagArr = array();
+
+        $couponsOut = array();
+
+        $coupons = $this->Coupon->find('all', $options);
+        foreach($coupons as $k => $v) {
+            foreach($v['CouponTag'] as $kk=>$vv) {
+                if(!array_key_exists($vv['tag'],  $tagArr)) {
+                    $tagArr[$vv['tag']] = 1;
+                } else {
+                    $tagArr[$vv['tag']] = $tagArr[$vv['tag']] + 1;
+                }
+            }
+            if(in_array($v['Coupon']['id'], $likedIdList)) {
+                $coupons[$k]['Coupon']['iLiked'] = True;
+            } else {
+                $coupons[$k]['Coupon']['iLiked'] = False;
+            }
+            if($tag !='') {
+                foreach($v['CouponTag'] as $kk=>$vv) {
+                    if($vv['tag'] == $tag) {
+                        $couponsOut[] = $coupons[$k];
+                        break;
+                    }
+                }
+            } else {
+                $couponsOut[] = $coupons[$k];
+            }
+        }
+
+        arsort($tagArr);
+
+
+
+        $this->set('coupons', $couponsOut);
+        $this->set('tag', $tag);
+        $this->set('cId', $cId);
+        $this->set('tags', $tagArr);
+        $this->set('categories', $categories);
+        $this->set('userId', $userId);
+        $this->set('likedList', $likedList);
+	}
+
 	public function indexByCategory($cId = 0) {
         $userId = $this->UserAuth->getUserId();
 
