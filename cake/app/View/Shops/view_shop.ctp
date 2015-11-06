@@ -48,7 +48,7 @@
                                                         <div id="coupon_id_like_<?php echo $v['id'];?>" style="width:100%;text-align:center;"><span style="font-size:9px;color:#797979">已领</span><span style="font-size:11px;color:#e84b3c"><?php echo $v['has_count'] ?></span></div>    
                                                     </div>
                                                 </div>
-                                                <div class="col-xs-7 coupon-desp">
+                                                <div class="col-xs-8 coupon-desp">
                                                     <p class="coupon-desp-description coupon-line"><?php echo $v['name'] ?></p>
                                                     <p class="coupon-desp-discount coupon-line"><?php echo $v['slogan'] ?></p>
                                                 </div>

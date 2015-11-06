@@ -16,7 +16,7 @@
                 <?php foreach($categories as $k => $v) { ?>
                     <div class="col-xs-4 text-center" style="padding-top:8px">
                         <a href="/Coupons/indexByCategory2/<?php echo ($k+1) ;?>">
-                            <img style="width:30px;height:30px" src="<?php echo $v['CouponsCategory']['pic_url'] ?>" >
+                            <img style="width:40px;height:40px" src="<?php echo $v['CouponsCategory']['pic_url'] ?>" >
                              <div class="caption">
                                 <p style="color:black"><?php echo $v['CouponsCategory']['name_cn'] ?></p>
                              </div>
@@ -67,7 +67,7 @@
                                                         <div id="coupon_id_like_<?php echo $v['Coupon']['id'];?>" style="width:100%;text-align:center;"><span style="font-size:9px;color:#797979">已领</span><span style="font-size:11px;color:#e84b3c"><?php echo $v['Coupon']['has_count'] ?></span></div>    
                                                     </div>
                                                 </div>
-                                                <div class="col-xs-7 coupon-desp">
+                                                <div class="col-xs-8 coupon-desp">
                                                     <p class="coupon-desp-description coupon-line"><?php echo $v['Coupon']['name'] ?></p>
                                                     <p class="coupon-desp-discount coupon-line"><?php echo $v['Coupon']['slogan'] ?></p>
                                                 </div>
